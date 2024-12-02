@@ -1,0 +1,52 @@
+.form-input{
+display: flex;
+flex-direction: row;
+align-items: center;
+justify-content: space-between;
+width: 100%;
+direction: rtl;
+margin: 10px;
+}
+
+.input-radios{
+width: 70% ;
+display: flex;
+flex-direction: row;
+align-items: center;
+justify-content: space-around;
+}
+
+input[type="checkbox"]{
+border-radius: 2px;
+width: 20px;
+height: 20px;
+}
+
+.checkbox {
+    width: 30px;
+    height: 30px;
+    background-color: rgb(182, 182, 172);
+    color: rgb(65, 92, 115);
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer; 
+    transition: all 0.3s ease;
+}
+
+.checkbox p{
+font-size: 10px;
+font-weight: bold;
+cursor: pointer;
+}
+
+
+.checkbox:hover {
+    background-color: rgb(160, 160, 150);
+}
+
+.checkbox.active {
+    background-color: rgb(65, 92, 115);
+    color: rgb(255, 255, 255);
+}
