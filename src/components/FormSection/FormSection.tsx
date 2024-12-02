@@ -1,15 +1,16 @@
 import './FormSection.css'
 import FormInput from '../FormInput/FormInput';
 interface Props {
-    title: string;
-    options: string[]
+    title: {name:string, key:string};
+    options: {name:string, key:string}[];
+    setFormData: React.Dispatch<React.SetStateAction<IMilitaryForm>>
 }
-export default function FormSection({title, options}: Props) {
+export default function FormSection({title, options,setFormData}: Props) {
   return (
     <div className="section">
-        <h2>{title}</h2>    
+        <h2>{title.name}</h2>    
         <div className="divider"></div>    
-        {options.map((option,i)=><FormInput title={option} key={i} />)}
+        {options.map((option)=><FormInput title={option} prymaryKey={title.key} key={option.key} setFormData={setFormData} />)}
     </div>
   )
 }

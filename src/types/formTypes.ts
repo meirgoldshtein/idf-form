@@ -26,9 +26,10 @@ interface CombatPreferences {
     combatPreferences: CombatPreferences;
     supportPreferences: SupportPreferences;
     techPreferences: TechPreferences;
-    submissionDate: Date;
-    lastModified: Date;
+    submissionDate: Date | null;
+    lastModified: Date | null;
     status: 'draft' | 'submitted' | 'processed';
     version: number;
+    [key: string]: any;
   }
   
