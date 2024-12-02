@@ -3,17 +3,18 @@ import { useState } from 'react';
 interface SendDataHookResult<T> {
   isLoading: boolean;
   error: Error | null;
+  succsses: boolean
   sendData: (data: T) => Promise<void>;
 }
 
 export function useSendData<T>(url: string): SendDataHookResult<T> {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
+  const [succsses, setSuccess] = useState(false);
 
   const sendData = async (data: T) => {
     setIsLoading(true);
     setError(null);
-
     try {
       const response = await fetch(url, {
         method: 'POST',
@@ -28,13 +29,15 @@ export function useSendData<T>(url: string): SendDataHookResult<T> {
       }
 
       const responseData = await response.json();
-      console.log('Data sent successfully:', responseData);
+      setSuccess(true);
+  
     } catch (err) {
+      console.error('Error sending data:', err);
       setError(err instanceof Error ? err : new Error('An unknown error occurred'));
     } finally {
       setIsLoading(false);
     }
   };
 
-  return { isLoading, error, sendData };
+  return { isLoading, error,  succsses ,sendData };
 }

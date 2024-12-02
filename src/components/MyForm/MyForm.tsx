@@ -6,7 +6,7 @@ import data from '../../data/initial.json'
 import PersonalComment from '../personalComment/PersonalComment'
 import { useSendData } from '../../hooks/useSendData'
 export default function MyForm() {
-  const { isLoading, error, sendData } = useSendData<IMilitaryForm>('https://localhost:3000/api/form');
+  const { isLoading, error, succsses ,sendData } = useSendData<IMilitaryForm>("http://localhost:3000/api/form/");
   const [formData, setFormData] = useState<IMilitaryForm>(data as IMilitaryForm)
   const handleSubmit = () => {
     setFormData((data) => ({ ...data, status: 'processed',submissionDate: new Date()}));
@@ -17,6 +17,7 @@ export default function MyForm() {
   return (
     <div className='form'>
       {error && <p>Error: {error.message}</p>}
+      {succsses && <p>הטופס נשלח בהצלחה</p>}
       <label className='name-label'>שם מלא</label>
       <input className='name' type="text" value={formData.name} onChange={(e) => {
         setFormData(data => ({ ...data, name: e.target.value }))
@@ -51,11 +52,13 @@ export default function MyForm() {
       />
       <PersonalComment setFormData={setFormData} />
       <button className='submit'
-       disabled={isLoading}
+       disabled={isLoading || succsses}
         onClick={handleSubmit}
         >{isLoading ? 'בשליחה...' : 'שלח טופס'}
         </button>
         {error && <p>Error: {error.message}</p>}
+        {succsses && <p>הטופס נשלח בהצלחה</p>}
+
     </div>
   )
 }
