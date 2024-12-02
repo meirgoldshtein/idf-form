@@ -1,0 +1,27 @@
+.guidelines {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: end;
+    padding: 1rem;
+    border-radius: 10px;
+    background-color: rgb(236, 233, 231);
+    margin: 1rem;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+    width: 90%;
+    height: 300px;
+    margin: 20px;
+}
+
+.row {
+    /* margin-top: 300px; */
+    text-align: right;
+    width: 90%;
+}
+
+.divider {
+    width: 90%;
+    height: 2px;
+    background-color: #c6c1c1;
+}
