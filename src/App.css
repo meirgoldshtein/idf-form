@@ -10,3 +10,37 @@ min-height: 100vh;
 min-width: 100vw;
 position: relative;
 }
+
+.personalComment{
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    padding: 1rem;
+    border-radius: 10px;
+    background-color: rgb(236, 233, 231);
+    margin: 1rem;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+    width: 90% ;
+    height: 300px;
+    margin: 20px;
+}
+
+h2{
+    margin: 0.5rem;
+}
+
+.divider {
+    width: 90%;
+    height: 2px;
+    background-color: #dbd6d6;
+    margin-bottom: 1rem;
+}
+input[type="text-area"]{
+    width: 95% ;
+    height: 200px;
+    border-radius: 5px;
+    border: 2px solid rgb(64, 154, 91);
+    background-color: rgb(227, 241, 236);
+    padding: 5px;
+    margin-bottom: 3rem;
+}

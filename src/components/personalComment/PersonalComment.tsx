@@ -1,5 +1,5 @@
 import React from 'react'
-import './personalComment.css'
+// import './personalComment.css'
 
 interface Props {
   setFormData: React.Dispatch<React.SetStateAction<IMilitaryForm>>

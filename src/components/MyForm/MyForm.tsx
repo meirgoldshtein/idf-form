@@ -5,18 +5,23 @@ import Guidelines from '../Guidelines/Guidelines'
 import data from '../../data/initial.json'
 import PersonalComment from '../personalComment/PersonalComment'
 import { useSendData } from '../../hooks/useSendData'
+import { useFormValidation } from '../../hooks/useFormValidation'
 export default function MyForm() {
-  const { isLoading, error, succsses ,sendData } = useSendData<IMilitaryForm>("http://localhost:3000/api/form/");
+  const { isLoading, error, succsses, sendData } = useSendData<IMilitaryForm>("http://localhost:3000/api/form/");
   const [formData, setFormData] = useState<IMilitaryForm>(data as IMilitaryForm)
+  const { validateFormData, validationError } = useFormValidation();
   const handleSubmit = () => {
-    setFormData((data) => ({ ...data, status: 'processed',submissionDate: new Date()}));
-    sendData(formData);
+    if (validateFormData(formData)) {
+      setFormData((data) => ({ ...data, status: 'processed', submissionDate: new Date() }));
+      sendData(formData);
+    }
   };
-  
+
 
   return (
     <div className='form'>
       {error && <p>Error: {error.message}</p>}
+      {validationError && <p className="error">{validationError}</p>}
       {succsses && <p>הטופס נשלח בהצלחה</p>}
       <label className='name-label'>שם מלא</label>
       <input className='name' type="text" value={formData.name} onChange={(e) => {
@@ -51,12 +56,13 @@ export default function MyForm() {
       />
       <PersonalComment setFormData={setFormData} />
       <button className='submit'
-       disabled={isLoading || succsses}
+        disabled={isLoading || succsses}
         onClick={handleSubmit}
-        >{isLoading ? 'בשליחה...' : 'שלח טופס'}
-        </button>
-        {error && <p>Error: {error.message}</p>}
-        {succsses && <p>הטופס נשלח בהצלחה</p>}
+      >{isLoading ? 'בשליחה...' : 'שלח טופס'}
+      </button>
+      {error && <p>Error: {error.message}</p>}
+      {validationError && <p className="error">{validationError}</p>}
+      {succsses && <p>הטופס נשלח בהצלחה</p>}
 
     </div>
   )
