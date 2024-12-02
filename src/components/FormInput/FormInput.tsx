@@ -6,7 +6,6 @@ interface Props {
 export default function FormInput({title}: Props) {
 
     const [activeIndex, setActiveIndex] = useState<number | null>(null);
-
     const setIsActive = (e: React.MouseEvent<HTMLDivElement>, index: number) => {
         const checkboxes = e.currentTarget.parentElement?.children;
         
