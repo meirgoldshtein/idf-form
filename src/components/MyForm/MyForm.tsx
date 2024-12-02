@@ -21,7 +21,6 @@ export default function MyForm() {
       <label className='name-label'>שם מלא</label>
       <input className='name' type="text" value={formData.name} onChange={(e) => {
         setFormData(data => ({ ...data, name: e.target.value }))
-        console.log(formData)
 
       }} />
       <Guidelines />
