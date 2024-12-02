@@ -3,12 +3,20 @@ import './MyForm.css'
 import FormSection from '../FormSection/FormSection'
 import Guidelines from '../Guidelines/Guidelines'
 import data from '../../data/initial.json'
+import PersonalComment from '../personalComment/PersonalComment'
+import { useSendData } from '../../hooks/useSendData'
 export default function MyForm() {
-  const [name, setName] = useState('')
+  const { isLoading, error, sendData } = useSendData<IMilitaryForm>('https://localhost:3000/api/form');
   const [formData, setFormData] = useState<IMilitaryForm>(data as IMilitaryForm)
+  const handleSubmit = () => {
+    setFormData((data) => ({ ...data, status: 'processed',submissionDate: new Date()}));
+    sendData(formData);
+  };
+  
 
   return (
     <div className='form'>
+      {error && <p>Error: {error.message}</p>}
       <label className='name-label'>שם מלא</label>
       <input className='name' type="text" value={formData.name} onChange={(e) => {
         setFormData(data => ({ ...data, name: e.target.value }))
@@ -16,7 +24,7 @@ export default function MyForm() {
 
       }} />
       <Guidelines />
-      <FormSection title={{name:'רצון לשרת כלוחם בזרוע היבשה', key:'combatPreferences'}}
+      <FormSection title={{ name: 'רצון לשרת כלוחם בזרוע היבשה', key: 'combatPreferences' }}
         options={[
           { name: 'גולני', key: "golani" },
           { name: 'שריון', key: "armor" },
@@ -24,7 +32,7 @@ export default function MyForm() {
           { name: 'חילוץ והצלה ', key: "searchAndRescue" }
         ]} setFormData={setFormData} />
       <FormSection
-        title={{name:"רצון לשרת כג'ובניק", key:'supportPreferences'}}
+        title={{ name: "רצון לשרת כג'ובניק", key: 'supportPreferences' }}
         options={[
           { name: 'מש"ק ממטרות', key: "targetingNCO" },
           { name: 'רס"ר בנימרודי', key: "nimrodiSergeant" },
@@ -33,7 +41,7 @@ export default function MyForm() {
         ]} setFormData={setFormData}
       />
       <FormSection
-        title={{name:"רצון לשרת בתכנית קודקוד", key:'techPreferences'}}
+        title={{ name: "רצון לשרת בתכנית קודקוד", key: 'techPreferences' }}
         options={[
           { name: "מפתח פולסטאק", key: "fullstack" },
           { name: "מפתח דאטא", key: "data" },
@@ -41,7 +49,13 @@ export default function MyForm() {
           { name: "תורן", key: "duty" }
         ]} setFormData={setFormData}
       />
-
+      <PersonalComment setFormData={setFormData} />
+      <button className='submit'
+       disabled={isLoading}
+        onClick={handleSubmit}
+        >{isLoading ? 'בשליחה...' : 'שלח טופס'}
+        </button>
+        {error && <p>Error: {error.message}</p>}
     </div>
   )
 }

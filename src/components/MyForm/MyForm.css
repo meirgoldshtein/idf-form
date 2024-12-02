@@ -30,3 +30,16 @@ left: 15vw;
     font-size: larger;
 
 }
+
+.submit{
+width: 90% ;
+height: 2.5rem;
+border-radius: 5px;
+border: 2px solid rgb(54, 135, 78);
+background-color: rgb(56, 154, 120);
+color : white;
+font-size: larger;
+padding: 5px;
+margin-bottom: 3rem;
+}
+
