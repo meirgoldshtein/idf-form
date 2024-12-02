@@ -1,0 +1,8 @@
+.image-container {
+    height: 50%;
+    overflow: hidden;
+  }
+  .image-container img {
+    transform: translateY(-40%);
+    width: 100%;
+  }
